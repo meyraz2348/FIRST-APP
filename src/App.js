@@ -1,104 +1,46 @@
-import {
-  Box,
-  Button,
-  Container,
-  Stack,
-  TextField,
-  InputLabel,
-  FormControl,
-  Select,
-  MenuItem,
-} from "@mui/material";
+import { Paper, Container, Stack } from "@mui/material";
+
 import { useState } from "react";
+import GuardComponent from "./Components/GuardComponent";
+import TemporaryDrawer from "./Components/TemporaryDrawer";
+import Sidings from "./Components/Sidings";
 function App() {
-  const [siteName, setSiteName] = useState("");
-  const [formFields, setFormFields] = useState([{ scans: "" }]);
-  const siteNameHandler = (e) => {
-    setSiteName(e.target.value);
+  const [addGuards, setAddGuards] = useState(false);
+  const [addSidings, setAddSidings] = useState(false);
+
+  const GuardHandler = () => {
+    console.log("calling guards");
+
+    setAddSidings(false);
+    setAddGuards(true);
+    console.log("g", addGuards);
+    console.log("s", addSidings);
   };
-  const nameChangeHandler = (event, index) => {
-    let data = [...formFields];
-    data[index][event.target.name] = event.target.value;
-    setFormFields(data);
+  const SidingHandler = () => {
+    setAddGuards(false);
+    setAddSidings(true);
+    console.log("adding sidings");
   };
-  const addFields = () => {
-    let object = {
-      scans: "",
-    };
-    setFormFields([...formFields, object]);
-  };
-  const submitHandler = (e) => {
-    e.preventDefault();
-    setFormFields([{ scans: "" }]);
-    setSiteName("");
-    console.log(siteName, formFields);
-  };
+
   return (
     <>
-      <Box
-        component="main"
-        sx={{
-          "& .MuiTextField-root": { m: 1.5, width: "25ch" },
-          alignItems: "center",
-          display: "flex",
-          flexGrow: 1,
-          minHeight: "100%",
-        }}
-      >
-        <Container maxWidth="sm">
-          <form onSubmit={submitHandler}>
-            <Box sx={{ py: 2 }}>
-              <FormControl fullWidth>
-                <InputLabel id="siteName">Sitename</InputLabel>
-                <Select
-                  labelId="siteName"
-                  name="siteName"
-                  value={siteName}
-                  label="siteName"
-                  onChange={siteNameHandler}
-                >
-                  <MenuItem value={"BroadMedows"}>BroadMedows</MenuItem>
-                  <MenuItem value={"Frankston"}>Frankston</MenuItem>
-                  <MenuItem value={"EppingOffice"}>EppingOffice</MenuItem>
-                </Select>
-              </FormControl>
-              {formFields.map((form, index) => {
-                return (
-                  <Stack key={index} direction="row" spacing={2}>
-                    <TextField
-                      label="scans"
-                      name="scans"
-                      margin="normal"
-                      variant="outlined"
-                      onChange={(event) => nameChangeHandler(event, index)}
-                      value={form.scans}
-                    />
-                  </Stack>
-                );
-              })}
-            </Box>
-          </form>
-          <Stack direction="row" spacing={2}>
-            <Button
-              color="primary"
-              size="small"
-              variant="contained"
-              onClick={addFields}
-            >
-              +
-            </Button>
-            <Button
-              color="primary"
-              size="small"
-              type="submit"
-              variant="contained"
-              onClick={submitHandler}
-            >
-              Submit
-            </Button>
-          </Stack>
+      <Stack spacing={2}>
+        <TemporaryDrawer onGuard={GuardHandler} onSiding={SidingHandler} />
+        <Container
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "1rem",
+            marginTop: "6rem",
+          }}
+        >
+          <Paper style={{ width: "700px" }}>
+            {addGuards && <GuardComponent />}
+            {addSidings && <Sidings />}
+          </Paper>
         </Container>
-      </Box>
+      </Stack>
     </>
   );
 }

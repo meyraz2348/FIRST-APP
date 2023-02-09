@@ -10,7 +10,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { useState } from "react";
-function App() {
+function Sidings() {
   const [siteName, setSiteName] = useState("");
   const [formFields, setFormFields] = useState([{ scans: "" }]);
   const siteNameHandler = (e) => {
@@ -102,4 +102,4 @@ function App() {
     </>
   );
 }
-export default App;
+export default Sidings;
