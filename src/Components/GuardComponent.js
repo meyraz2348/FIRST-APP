@@ -52,7 +52,7 @@ function GuardComponent() {
             <Stack direction="row" spacing={2}>
               <Box sx={{ py: 2 }}>
                 <FormControl fullWidth>
-                  <InputLabel id="siteName">Sitename</InputLabel>
+                  <InputLabel id="siteName">Site Name</InputLabel>
                   <Select
                     labelId="siteName"
                     name="siteName"
