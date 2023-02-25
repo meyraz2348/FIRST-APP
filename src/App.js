@@ -17,13 +17,10 @@ function App() {
     setGuardWatch(false);
 
     setAddGuards(true);
-    console.log("g", addGuards);
-    console.log("s", addSidings);
   };
   const SidingHandler = () => {
     setAddGuards(false);
     setGuardWatch(false);
-
     setAddSidings(true);
     console.log("adding sidings");
   };
@@ -32,9 +29,6 @@ function App() {
     setAddSidings(false);
     setGuardWatch(true);
     console.log("adding Guards");
-  };
-  const watchHandler = () => {
-    setHasData((prev) => !prev);
   };
 
   return (
@@ -56,7 +50,7 @@ function App() {
         >
           {addGuards && <GuardComponent />}
           {addSidings && <Sidings />}
-          {guardWatch && <GuradWatch onWatchHandler={watchHandler} />}
+          {guardWatch && <GuradWatch />}
         </Container>
       </Stack>
     </>

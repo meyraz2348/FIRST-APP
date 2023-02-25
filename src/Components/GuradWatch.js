@@ -1,65 +1,44 @@
 import React, { useEffect } from "react";
-import dayjs from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
-import Circle from "@uiw/react-color-circle";
 import { Box, Container, TextField, Button, Paper } from "@mui/material";
 import { Stack } from "@mui/system";
 import { useState } from "react";
-import BasicTable from "./DataTable";
+import DataTable from "./DataTable";
 
 const GuradWatch = (props) => {
   const [guardName, setGuardName] = useState("");
   const [guardNumber, setGuardNumber] = useState("");
   const [sidingName, setSidingName] = useState("");
-  const [hasData, setHasData] = useState(false);
-
-  const [startTime, setStartTime] = React.useState(
-    dayjs("2018-01-01T00:00:00.000Z")
-  );
-  const [finishTime, setFinishTime] = React.useState(
-    dayjs("2018-01-01T00:00:00.000Z")
-  );
+  const [formValid, setFormValid] = useState(false);
+  const [startTime, setStartTime] = React.useState(new Date().getTime());
+  const [finishTime, setFinishTime] = React.useState(new Date().getTime());
+  const [sTime, setSTime] = useState(false);
+  const [fTime, setFTime] = useState(false);
   const [rows, setRows] = useState([]);
-  const startTimeHandler = (newValue) => {
-    setStartTime(newValue);
-  };
-  const finishTimeHandler = (newValue) => {
-    setFinishTime(newValue);
-  };
-  const sidingChangeHandler = (event) => {
-    setSidingName(event.target.value);
-  };
-  const nameChangeHandler = (event) => {
-    setGuardName(event.target.value);
-  };
-  const numberChangeHandler = (event) => {
-    setGuardNumber(event.target.value);
-  };
+
   const submitHandler = (event) => {
     event.preventDefault();
-    setRows({
-      guardName,
-      guardNumber,
-      sidingName,
-      start: startTime,
-      finish: finishTime,
-    });
+    setRows((row) => [
+      ...row,
+      {
+        guardName,
+        guardNumber,
+        sidingName,
+        start: new Date(startTime).toLocaleTimeString(),
+        finish: new Date(finishTime).toLocaleTimeString(),
+      },
+    ]);
     setGuardName("");
     setGuardNumber("");
     setSidingName("");
-    setStartTime("");
-    setFinishTime("");
-    setHasData((prev) => !prev);
-    // props.onWatchHandler();
-    console.log(rows);
-    console.log(rows.guardNumber);
+    setStartTime(new Date().getTime());
+    setFTime(false);
+    setSTime(false);
+    setFinishTime(new Date().getTime());
   };
-  useEffect(() => {
-    console.log(hasData);
-    console.log("im runnign");
-  }, [hasData]);
+
   return (
     <Box
       component="main"
@@ -76,7 +55,7 @@ const GuradWatch = (props) => {
     >
       <Stack direction="column">
         <Container maxWidth="large">
-          <Paper style={{ width: "1200px" }}>
+          <Paper style={{ width: "1050px" }}>
             <Box sx={{ py: 2 }}>
               <form onSubmit={submitHandler}>
                 <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
@@ -86,7 +65,7 @@ const GuradWatch = (props) => {
                     margin="normal"
                     variant="outlined"
                     type="string"
-                    onChange={(event) => nameChangeHandler(event)}
+                    onChange={(event) => setGuardName(event.target.value)}
                     value={guardName}
                   />
                   <TextField
@@ -95,7 +74,7 @@ const GuradWatch = (props) => {
                     margin="normal"
                     type="string"
                     variant="outlined"
-                    onChange={(event) => numberChangeHandler(event)}
+                    onChange={(event) => setGuardNumber(event.target.value)}
                     value={guardNumber}
                   />
                   <TextField
@@ -104,20 +83,20 @@ const GuradWatch = (props) => {
                     type="string"
                     margin="normal"
                     variant="outlined"
-                    onChange={(event) => sidingChangeHandler(event)}
+                    onChange={(event) => setSidingName(event.target.value)}
                     value={sidingName}
                   />
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <TimePicker
                       label="Start Time"
                       value={startTime}
-                      onChange={startTimeHandler}
+                      onChange={(newValue) => setStartTime(newValue)}
                       renderInput={(params) => <TextField {...params} />}
                     />
                     <TimePicker
                       label="Finish Time"
                       value={finishTime}
-                      onChange={finishTimeHandler}
+                      onChange={(newValue) => setFinishTime(newValue)}
                       renderInput={(params) => <TextField {...params} />}
                     />
                   </LocalizationProvider>
@@ -148,7 +127,7 @@ const GuradWatch = (props) => {
             }}
           >
             <h1>Watch-List</h1>
-            <BasicTable arr={rows} />
+            <DataTable arr={rows} setArr={setRows} />
           </Box>
         </Container>
       </Stack>
