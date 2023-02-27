@@ -11,6 +11,8 @@ const GuradWatch = (props) => {
   const [guardName, setGuardName] = useState("");
   const [guardNumber, setGuardNumber] = useState("");
   const [sidingName, setSidingName] = useState("");
+  const [isButtonValid, setIsButtonValid] = useState(false);
+
   const [formValid, setFormValid] = useState(false);
   const [startTime, setStartTime] = React.useState(new Date().getTime());
   const [finishTime, setFinishTime] = React.useState(new Date().getTime());
@@ -20,6 +22,7 @@ const GuradWatch = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+
     setRows((row) => [
       ...row,
       {

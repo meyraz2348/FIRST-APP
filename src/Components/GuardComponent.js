@@ -41,6 +41,7 @@ function GuardComponent() {
         component="main"
         sx={{
           "& .MuiTextField-root": { m: 1.5, width: "25ch" },
+          "& .MuiFormControl-root": { m: 1.5, width: "25ch" },
           alignItems: "center",
           display: "flex",
           flexGrow: 1,
@@ -49,9 +50,9 @@ function GuardComponent() {
       >
         <Container maxWidth="sm">
           <form onSubmit={submitHandler}>
-            <Stack direction="row" spacing={2}>
+            <Stack direction="row" spacing={2} justifyContent="center">
               <Box sx={{ py: 2 }}>
-                <FormControl fullWidth>
+                <FormControl>
                   <InputLabel id="siteName">Site Name</InputLabel>
                   <Select
                     labelId="siteName"
@@ -92,7 +93,7 @@ function GuardComponent() {
               </Box>
             </Stack>
           </form>
-          <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={2} justifyContent="center">
             <Button
               color="primary"
               size="small"

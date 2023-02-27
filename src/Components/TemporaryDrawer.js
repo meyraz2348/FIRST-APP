@@ -120,9 +120,10 @@ export default function TemporaryDrawer(props) {
           </IconButton>
         </DrawerHeader>
 
-        <Button onClick={props.onGuard}>Add-Guards</Button>
+        <Button onClick={props.onAddGuard}>Add-Guards</Button>
         <Button onClick={props.onSiding}>Sidings</Button>
         <Button onClick={props.onGuardWatch}>Guard-Watch</Button>
+        <Button onClick={props.onGuard}>Guards</Button>
       </Drawer>
     </Box>
   );

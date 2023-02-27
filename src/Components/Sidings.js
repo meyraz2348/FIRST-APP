@@ -39,6 +39,7 @@ function Sidings() {
         component="main"
         sx={{
           "& .MuiTextField-root": { m: 1.5, width: "25ch" },
+          "& .MuiFormControl-root": { m: 1.5, width: "25ch" },
           alignItems: "center",
           display: "flex",
           flexGrow: 1,
@@ -47,7 +48,12 @@ function Sidings() {
       >
         <Container maxWidth="sm">
           <form onSubmit={submitHandler}>
-            <Box sx={{ py: 2 }}>
+            <Box
+              sx={{ py: 2 }}
+              display="grid"
+              justifyContent="center"
+              alignContent="center"
+            >
               <FormControl fullWidth>
                 <InputLabel id="siteName">Sitename</InputLabel>
                 <Select
@@ -78,7 +84,7 @@ function Sidings() {
               })}
             </Box>
           </form>
-          <Stack direction="row" spacing={2}>
+          <Stack direction="row" spacing={2} justifyContent="center">
             <Button
               color="primary"
               size="small"
