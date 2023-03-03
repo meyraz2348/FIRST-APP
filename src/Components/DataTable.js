@@ -21,7 +21,7 @@ const DataTable = ({ arr, setArr }) => {
       ...prevState,
       [rowId]: !prevState[rowId],
     }));
-    console.log(guardChecked[rowId]);
+
     if (guardChecked[rowId]) {
       console.log(`Guard watch stopped for ${rowId}`);
     }
@@ -34,7 +34,7 @@ const DataTable = ({ arr, setArr }) => {
         if (request.status !== 200) {
           return;
         }
-        console.log("after rescode");
+
         setStatusActive((prevState) => ({
           ...prevState,
           [rowId]: "#95ff00",

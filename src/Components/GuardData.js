@@ -6,12 +6,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Paper } from "@mui/material";
-
+import { mockData } from "../mockData";
 const GuardData = ({ arr }) => {
   const [rows, setRows] = React.useState([]);
 
   React.useEffect(() => {
-    setRows(arr);
+    setRows(mockData);
   }, [arr]);
   return (
     <TableContainer component={Paper}>
@@ -34,8 +34,12 @@ const GuardData = ({ arr }) => {
               >
                 <TableCell align="center">{row.guardNumber}</TableCell>
                 <TableCell align="center">{row.sidingName}</TableCell>
-                <TableCell align="center">{row.start}</TableCell>
-                <TableCell align="center">{row.recentScan}</TableCell>
+                <TableCell align="center">
+                  {new Date(row.startTime).toLocaleTimeString()}
+                </TableCell>
+                <TableCell align="center">
+                  {new Date(row.finishTime).toLocaleTimeString()}
+                </TableCell>
                 <TableCell align="center">{row.timeElasped}</TableCell>
                 {/* <TableCell align="center">BroadMedows</TableCell>
                 <TableCell align="center">22:11:00</TableCell>
