@@ -12,22 +12,27 @@ const Gurad = (props) => {
     event.preventDefault();
 
     try {
-      const request = await axios.post("http://localhost:3002/guard", {
-        guardNumber,
-      });
-      console.log(request);
-      const { sidingName, start, recentScan } = request.data;
-      if (request.status !== 200) {
-        return;
-      }
+      const request = await axios.get(
+        "http://localhost:3002/api/watch/add-guard"
+      );
+      console.log(request.data);
+      const {
+        NAME: guardName,
+        CONTACT_ID: guardNumber,
+        SIDING: sidingName,
+      } = request.data;
+      // if (request.status !== 200) {
+      //   return;
+      // }
       setRows((row) => [
         ...row,
         {
           guardNumber,
+          guardName,
           sidingName,
-          start,
-          recentScan,
-          timeElapsed: Math.floor(Math.abs(start - recentScan)),
+          // start,
+          // recentScan,
+          // timeElapsed: Math.floor(Math.abs(start - recentScan)),
         },
       ]);
       setGuardNumber("");

@@ -11,7 +11,7 @@ const GuardData = ({ arr }) => {
   const [rows, setRows] = React.useState([]);
 
   React.useEffect(() => {
-    setRows(mockData);
+    setRows(arr);
   }, [arr]);
   return (
     <TableContainer component={Paper}>
@@ -19,10 +19,11 @@ const GuardData = ({ arr }) => {
         <TableHead>
           <TableRow>
             <TableCell align="center">Guard Number</TableCell>
+            <TableCell align="center">Guard Name</TableCell>
             <TableCell align="center">Siding</TableCell>
-            <TableCell align="center">Start Time</TableCell>
+            {/* <TableCell align="center">Start Time</TableCell>
             <TableCell align="center">Recent Scan Time</TableCell>
-            <TableCell align="center">Time Elapsed</TableCell>
+            <TableCell align="center">Time Elapsed</TableCell> */}
           </TableRow>
         </TableHead>
         {rows && (
@@ -33,14 +34,15 @@ const GuardData = ({ arr }) => {
                 key={row.guardNumber}
               >
                 <TableCell align="center">{row.guardNumber}</TableCell>
+                <TableCell align="center">{row.guardName}</TableCell>
                 <TableCell align="center">{row.sidingName}</TableCell>
-                <TableCell align="center">
+                {/* <TableCell align="center">
                   {new Date(row.startTime).toLocaleTimeString()}
                 </TableCell>
                 <TableCell align="center">
                   {new Date(row.finishTime).toLocaleTimeString()}
                 </TableCell>
-                <TableCell align="center">{row.timeElasped}</TableCell>
+                <TableCell align="center">{row.timeElasped}</TableCell> */}
                 {/* <TableCell align="center">BroadMedows</TableCell>
                 <TableCell align="center">22:11:00</TableCell>
                 <TableCell align="center">23:11:00</TableCell>

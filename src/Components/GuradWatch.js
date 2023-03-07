@@ -28,7 +28,7 @@ const GuradWatch = (props) => {
       {
         guardName,
         guardNumber,
-        sidingName,
+        siding: sidingName,
         start: new Date(startTime).toLocaleTimeString(),
         finish: new Date(finishTime).toLocaleTimeString(),
       },
